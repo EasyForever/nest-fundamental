@@ -28,11 +28,11 @@ export class UserController {
 
   @Get()
   findAll(@Query() query) {
-    console.log(query);
-    return {
-      code: 200,
-      message: query.name
-    };
+    return [
+      { name: '小满', age: 19 },
+      { name: '小明', age: 18 },
+      { name: '小红', age: 19 }
+    ];
   }
 
   @Post()
