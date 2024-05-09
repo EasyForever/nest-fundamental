@@ -1,11 +1,30 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AppService2 } from './app.service2';
 import { UserModule } from './user/user.module';
+import { ListModule } from './list/list.module';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
-  imports: [UserModule],
+  imports: [UserModule, ListModule, UploadModule],
   controllers: [AppController],
-  providers: [AppService]
+  providers: [
+    AppService,
+    AppService2,
+    {
+      provide: 'Shop',
+      useValue: ['TB', 'JD', 'PDD']
+    },
+    {
+      provide: 'fff',
+      inject: [AppService2],
+      useFactory(...args) {
+        console.log(args[0].getHello());
+
+        return 123;
+      }
+    }
+  ]
 })
 export class AppModule {}
