@@ -1,7 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, ParseUUIDPipe } from '@nestjs/common';
 import { ListService } from './list.service';
 import { CreateListDto } from './dto/create-list.dto';
 import { UpdateListDto } from './dto/update-list.dto';
+import * as uuid from 'uuid';
+
+console.log('uuid :>> ', uuid.v4());
 
 @Controller('list')
 export class ListController {
@@ -18,8 +21,15 @@ export class ListController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    console.log(typeof id, '===========================');
     return this.listService.findOne(+id);
+  }
+
+  @Get('uid/:uid')
+  findUid(@Param('uid', ParseUUIDPipe) uid: string) {
+    console.log(typeof uid, '===========================');
+    return this.listService.findOne(+uid);
   }
 
   @Patch(':id')

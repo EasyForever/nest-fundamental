@@ -5,9 +5,10 @@ import { AppService2 } from './app.service2';
 import { UserModule } from './user/user.module';
 import { ListModule } from './list/list.module';
 import { UploadModule } from './upload/upload.module';
+import { LoginModule } from './login/login.module';
 
 @Module({
-  imports: [UserModule, ListModule, UploadModule],
+  imports: [UserModule, ListModule, UploadModule, LoginModule],
   controllers: [AppController],
   providers: [
     AppService,
