@@ -8,9 +8,11 @@ import { UploadModule } from './upload/upload.module';
 import { LoginModule } from './login/login.module';
 import { SpiderModule } from './spider/spider.module';
 import { GuardModule } from './guard/guard.module';
+import { OtherModule } from './other/other.module';
+import { OtherService } from './other/other.service';
 
 @Module({
-  imports: [UserModule, ListModule, UploadModule, LoginModule, SpiderModule, GuardModule],
+  imports: [UserModule, ListModule, UploadModule, LoginModule, SpiderModule, GuardModule, OtherModule],
   controllers: [AppController],
   providers: [
     AppService,
