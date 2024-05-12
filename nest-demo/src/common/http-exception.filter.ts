@@ -14,7 +14,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       code: 500,
       date: new Date(),
       status,
-      data: exception.message,
+      data: exception,
       path: request.url
     });
   }
