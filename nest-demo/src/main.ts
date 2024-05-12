@@ -6,6 +6,7 @@ import { join } from 'path';
 import { ResponseInterceptor } from './common/response.interceptor';
 import * as session from 'express-session';
 import { HttpExceptionFilter } from './common/http-exception.filter';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -30,6 +31,15 @@ async function bootstrap() {
 
   // 全局过滤器（http异常过滤器）
   app.useGlobalFilters(new HttpExceptionFilter());
+
+  const config = new DocumentBuilder()
+    .setTitle('NestJS API')
+    .setDescription('NestJS API')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
 }
