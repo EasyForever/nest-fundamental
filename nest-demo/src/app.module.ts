@@ -9,10 +9,33 @@ import { LoginModule } from './login/login.module';
 import { SpiderModule } from './spider/spider.module';
 import { GuardModule } from './guard/guard.module';
 import { OtherModule } from './other/other.module';
-import { OtherService } from './other/other.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DbTestModule } from './db-test/db-test.module';
 
 @Module({
-  imports: [UserModule, ListModule, UploadModule, LoginModule, SpiderModule, GuardModule, OtherModule],
+  imports: [
+    UserModule,
+    ListModule,
+    UploadModule,
+    LoginModule,
+    SpiderModule,
+    GuardModule,
+    OtherModule,
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '1234qwer.',
+      database: 'nest-demo',
+      // entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+      retryAttempts: 5,
+      retryDelay: 3000,
+      autoLoadEntities: true
+    }),
+    DbTestModule
+  ],
   controllers: [AppController],
   providers: [
     AppService,
